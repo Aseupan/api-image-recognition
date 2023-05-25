@@ -1,22 +1,14 @@
-const redirectUrls = require("./redirectUrls");
-const {
-  client_id,
-  project_id,
-  auth_uri,
-  token_uri,
-  auth_provider_x509_cert_url,
-} = process.env;
+const { private_key } = process.env;
 
-const generateClientSecret = (client_secret) => ({
-  web: {
-    client_id,
-    project_id,
-    auth_uri,
-    token_uri,
-    auth_provider_x509_cert_url,
-    client_secret,
-    redirect_uris: redirectUrls,
-  },
-});
+const generateClientSecret = (client_email) => {
+  return JSON.parse(
+    JSON.stringify({
+      credentials: {
+        client_email,
+        private_key,
+      },
+    }),
+  );
+};
 
 module.exports = generateClientSecret;

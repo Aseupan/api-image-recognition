@@ -1,12 +1,12 @@
-const generateClientSecret = require("../../config/clientSecret");
-const jwtToken = require("../services/jwtToken");
-const vision = require("@google-cloud/vision");
-const fs = require("fs");
+const generateClientSecret = require('../../config/clientSecret');
+const jwtToken = require('../services/jwtToken');
+const vision = require('@google-cloud/vision');
+const fs = require('fs');
 
 const detectImage = async (req, res) => {
   try {
-    const client_secret = jwtToken(req);
-    const secret = generateClientSecret(client_secret);
+    const client_email = jwtToken(req);
+    const secret = generateClientSecret(client_email);
 
     const client = new vision.ImageAnnotatorClient(secret);
 
@@ -17,10 +17,8 @@ const detectImage = async (req, res) => {
           name: e.originalname,
           labels: labelAnnotations?.map((e) => e.description),
         };
-      })
+      }),
     );
-
-    console.log(labels);
 
     req.files?.forEach(async (e) => {
       fs.unlinkSync(e.path);
@@ -28,7 +26,7 @@ const detectImage = async (req, res) => {
 
     res.send({ data: labels });
   } catch (err) {
-    res.send({ message: "error", error: err });
+    res.send({ message: 'error', error: err });
   }
 };
 
