@@ -30,9 +30,19 @@ const detectImage = async (req, res) => {
       fs.unlinkSync(e.path);
     });
 
-    res.send({ data: labels });
+    res.send({
+      data: labels,
+      message: 'Success get label data',
+      success: true,
+      error: null,
+    });
   } catch (err) {
-    res.send({ message: 'error', error: err });
+    res.send({
+      message: 'error',
+      error: 'Error while retrieving data',
+      data: null,
+      success: false,
+    });
   }
 };
 
