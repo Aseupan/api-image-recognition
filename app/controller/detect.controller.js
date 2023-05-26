@@ -15,7 +15,13 @@ const detectImage = async (req, res) => {
         const [{ labelAnnotations }] = await client.labelDetection(e.path);
         return {
           name: e.originalname,
-          labels: labelAnnotations?.map((e) => e.description),
+          labels: labelAnnotations?.reduce((names, entry) => {
+            console.log(entry);
+            if (entry.score > 0.9) {
+              names.push(entry.description);
+            }
+            return names;
+          }, []),
         };
       }),
     );

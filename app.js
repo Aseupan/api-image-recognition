@@ -16,7 +16,7 @@ app.use(
 );
 
 app.get('/', (_, res) => {
-  res.send({ message: `Server run on ${PORT}` });
+  res.send({ message: `Hello 👋` });
 });
 
 detectRoute(app);
