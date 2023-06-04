@@ -5,8 +5,8 @@
 This project is built using JavaScript under NodeJS environtent. To start this project: 
 
 1. Clone this repo into your local computer `git clone`
-2. Create `.env` file in root project with variables from `.env.example`
-3. Run `npm i` to install all dependenciers required for the app. Make sure you're using at lease LTS Node JS Version
+2. Run `npm i` to install all dependenciers required for the app. Make sure you're using at lease LTS Node JS Version
+3. Secret `key.json` is required for running the app. Contact me if you want the key
 4. Run `npm run dev` to start the app
 5. Enjoy the app 😁
 
